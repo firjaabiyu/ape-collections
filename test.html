@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Content Display</title>
+    <style>
+        .button-container {
+            margin: 20px;
+        }
+        .content {
+            margin: 20px;
+            font-size: 1.2em;
+            display: none; /* Hide all by default */
+        }
+        .content.default {
+            display: block; /* Show default content */
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+        .button-container button.active {
+            color: red; /* Change text color when active */
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="button1" onclick="displayContent('content1', 'button1')">Button 1</button>
+        <button id="button2" onclick="displayContent('content2', 'button2')">Button 2</button>
+        <button id="button3" onclick="displayContent('content3', 'button3')">Button 3</button>
+        <button id="button4" onclick="displayContent('content4', 'button4')">Button 4</button>
+    </div>
+    <div class="content" id="content1">
+        Ini adalah konten dari Button 1.
+    </div>
+    <div class="content" id="content2">
+        Ini adalah konten dari Button 2.
+    </div>
+    <div class="content default" id="content3">
+        Ini adalah konten dari Button 3.
+    </div>
+    <div class="content" id="content4">
+        Ini adalah konten dari Button 4.
+    </div>
+
+    <script>
+        function displayContent(contentId, buttonId) {
+            // Hide all content divs
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            // Show the selected content
+            var selectedContent = document.getElementById(contentId);
+            selectedContent.style.display = 'block';
+
+            // Remove 'active' class from all buttons
+            var buttons = document.querySelectorAll('.button-container button');
+            buttons.forEach(function(button) {
+                button.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked button
+            var selectedButton = document.getElementById(buttonId);
+            selectedButton.classList.add('active');
+        }
+
+        // Ensure only the default content is visible on page load and mark the default button as active
+        document.addEventListener('DOMContentLoaded', function() {
+            displayContent('content3', 'button3');
+        });
+    </script>
+</body>
+</html>
